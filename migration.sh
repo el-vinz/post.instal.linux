@@ -5,9 +5,23 @@ TEMP=~/.tmpinstall
 LINUX_DISTRIB=$(awk '{print ($1)}'  /etc/issue)
 DISTRIB_VERSION=$(awk '{print ($2)}'  /etc/issue)
 GNOME_VERSION=$(gnome-shell --version)
-SOFTWARES=vlc pingus mplayer id3v2 mixxx hydrogen rsync qemu-kvm libvirt-bin virt-manager vim ffmpeg tilix 
+#SOFTWARES=vlc pingus mplayer id3v2 mixxx hydrogen rsync qemu-kvm libvirt-bin virt-manager vim ffmpeg tilix sshfs
+SOFTWARES=vlc pingus rsync qemu-kvm libvirt-bin virt-manager vim ffmpeg tilix sshfs cmatrix ipcalc nmap
+
 
 [ ! -d $TEMP ] && mkdir $TEMP
+
+check_root () {
+
+	if [ "$UID" -ne "0" ]
+        then
+                echo "Vous devez être administrateur. Fin du script."
+                exit 1
+fi
+
+}
+
+
 
 choose_distribution () {
 	case $LINUX_DISTRIB in
@@ -48,11 +62,30 @@ packages_yum () {
 	#installation mp3 gain
 
 	 add-yum-repository ppa:flexiondotorg/audio -y
-	 yum-get update
-	 yum-get install mp3gain -y
+	 yum update
+	 yum install mp3gain -y
 
 	#installation des logiciels usuels des dépôts.
 	yum install -y $SOFTWARES
+
+}
+
+packages_zypper () {
+
+	zypper update && zypper upgrade -y
+
+	# installation de youtube-dl
+	wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl
+	chmod a+x /usr/local/bin/youtube-dl
+	hash -r
+	#installation mp3 gain
+
+	 add-zypper-repository ppa:flexiondotorg/audio -y
+	 zypper-get update
+	 zypper-get install mp3gain -y
+
+	#installation des logiciels usuels des dépôts.
+	zypper install -y $SOFTWARES
 
 }
 
@@ -69,6 +102,8 @@ desktop_configure () {
 	xml_gen >#ou est ce fichier ? 
 
 }
+
+
 
 
 xml_gen () {
