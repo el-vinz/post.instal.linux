@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=fipElectro
+GenericName=fipElectro
+Comment[fr]=fipElectro
+Exec=fipelectro
+Icon=/usr/share/icons/twistos/fipelectro.jpg
+Terminal=False
+Type=Application
+Categories=AudioVideo
+Keywords=Player

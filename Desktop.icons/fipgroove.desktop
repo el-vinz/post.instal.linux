@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Name=fip Groove
+GenericName=fip Groove
+Comment[fr]=Fip Groove
+Exec=fipgroove
+TryExec=/usr/bin/vlc
+Icon=/usr/share/icons/twistos/fipgroove.png
+Terminal=false
+Type=Application
+Categories=AudioVideo
+X-KDE-Protocols=ftp,http,https,mms,rtmp,rtsp,sftp,smb
+Keywords=Player
+
+
