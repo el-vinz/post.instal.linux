@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=fipjazz
+GenericName=fipjazz
+Comment[fr]=fipjazz
+Exec=fipjazz
+Icon=/usr/share/icons/twistos/fipjazz.png
+Terminal=false
+Type=Application
+Categories=AudioVideo
+Keywords=Player

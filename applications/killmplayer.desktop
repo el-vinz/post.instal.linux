@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=killmplayer
+GenericName=killmplayer
+Comment[fr]=nosound
+Exec=killall mplayer
+Icon=/usr/share/icons/.twistos/killvlc.png
+Terminal=false
+Type=Application
+Categories=AudioVideo
+Keywords=Player
+Name[fr_FR]=kill

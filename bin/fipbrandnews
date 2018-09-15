@@ -1,0 +1,6 @@
+#!/bin/bash
+
+killall mplayer
+mplayer http://direct.fipradio.fr/live/fip-webradio5.mp3 
+
+exit

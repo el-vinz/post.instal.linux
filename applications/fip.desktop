@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=fip
+GenericName=fip
+Comment[fr]=fip
+Exec=fip
+Icon=/usr/share/icons/twistos/fip.jpg
+Terminal=false
+Type=Application
+Categories=AudioVideo
+Keywords=Player

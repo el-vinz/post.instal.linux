@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=molotov
+GenericName=molotov
+Comment[fr]=molotov
+Exec=molotov
+Icon=/usr/share/icons/twistos/molotov.jpg
+Terminal=false
+Type=Application
+Categories=AudioVideo
+Keywords=Player

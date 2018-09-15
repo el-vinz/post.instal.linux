@@ -1,0 +1,3 @@
+#!/bin/bash
+killall mplayer
+mplayer http://direct.franceinter.fr/live/franceinter-midfi.mp3

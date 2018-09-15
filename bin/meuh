@@ -1,0 +1,24 @@
+#!/bin/bash
+
+link="http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3"
+path="~/.config/argos/"
+
+getstream () {
+
+#echo "$link" > ~/.config/argos/url
+
+
+stream=$(ffprobe "$link" 2>&1 | grep -A90 'Metadata:' | grep StreamTitle)
+
+stream=$(echo ${stream:20})
+
+#bash ~/.config/daemon.sh
+
+#echo $stream > $path/title
+
+}
+
+killall mplayer
+mplayer $link
+
+exit
