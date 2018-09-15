@@ -1,12 +1,16 @@
 #!/bin/bash
 
-PACK_URL="http://myos.fr/migration/migration.pack.tar.gz"
+#L'installation se fera par github via git-clone qui téléchargera également les fichiers annexes.
+
+#PACK_URL="http://myos.fr/migration/migration.pack.tar.gz"
+
 TEMP=~/.tmpinstall
 LINUX_DISTRIB=$(awk '{print ($1)}'  /etc/issue)
 DISTRIB_VERSION=$(awk '{print ($2)}'  /etc/issue)
 GNOME_VERSION=$(gnome-shell --version)
 #SOFTWARES=vlc pingus mplayer id3v2 mixxx hydrogen rsync qemu-kvm libvirt-bin virt-manager vim ffmpeg tilix sshfs
 SOFTWARES=vlc pingus rsync qemu-kvm libvirt-bin virt-manager vim ffmpeg tilix sshfs cmatrix ipcalc nmap
+RELEASE=$(lsb_release -a | rev | cut -d " " -f1 | rev)
 
 
 [ ! -d $TEMP ] && mkdir $TEMP
@@ -22,20 +26,6 @@ fi
 }
 
 
-
-choose_distribution () {
-	case $LINUX_DISTRIB in
-		Ubuntu) packages_apt ;;
-		Fedora) packages_yum ;;
-		Opensuse) packages_zypper;;
-		*) echo "Your distribution $LINUX_DISTRIB is not supported by this script" 
-			exit 1;;
-
-	esac
-}
-
-
-
 ./packages_apt.sh
 
 #packages_apt $SOFTWARES
@@ -47,9 +37,18 @@ choose_distribution () {
 ./packages_zypper.sh
 #packages_zypper $SOFTWARES
 
+choose_distribution () {
+	case $LINUX_DISTRIB in
+		Ubuntu) packages_apt $SOFTWARES;;
+		Fedora) packages_yum $SOFTWARES;;
+		Opensuse) packages_zypper $SOFTWARES;;
+		*) echo "Your distribution $LINUX_DISTRIB is not supported by this script" 
+			exit 1;;
 
+	esac
+}
 
-desktop_configure () {
+tweak_it () {
 	[ ! -d /usr/share/icons/twistos ] && mkdir /usr/share/icons/twistos
 	cp $TEMP/icons/* /usr/share/icons/twistos/
 	cp $TEMP/bin/* /usr/local/bin/
@@ -59,12 +58,9 @@ desktop_configure () {
 
 	#Puis on modifie le xml charagé de faire tourner les fonds d'écrans
 
-	xml_gen >#ou est ce fichier ? 
+	xml_gen >>/usr/share/gnome-background-properties/${RELEASE}-wallpapers.xml
 
 }
-
-
-
 
 xml_gen () {
 	for f in $(ls -1 $TEMP/backgrounds/)
@@ -126,4 +122,4 @@ choose_distribution
 
 packages_apt || echo "Erreur dans le téléchargement des paquets" && exit 1 
 
-desktop_configure 
+tweak_it 
