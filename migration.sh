@@ -36,58 +36,18 @@ choose_distribution () {
 
 
 
-packages_apt () {
-	apt update && apt upgrade -y
-	
-	wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl
-	chmod a+x /usr/local/bin/youtube-dl
-	hash -r
+./packages_apt.sh
 
-	add-apt-repository ppa:flexiondotorg/audio -y
-	apt-get update
-	apt-get install mp3gain -y
+#packages_apt $SOFTWARES
 
-	apt install -y $SOFTWARES  
+./packages_yum.sh
 
-}
+#packages_yum $SOFTWARES
 
-packages_yum () {
+./packages_zypper.sh
+#packages_zypper $SOFTWARES
 
-	yum update && yum upgrade -y
 
-	# installation de youtube-dl
-	wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl
-	chmod a+x /usr/local/bin/youtube-dl
-	hash -r
-	#installation mp3 gain
-
-	 add-yum-repository ppa:flexiondotorg/audio -y
-	 yum update
-	 yum install mp3gain -y
-
-	#installation des logiciels usuels des dépôts.
-	yum install -y $SOFTWARES
-
-}
-
-packages_zypper () {
-
-	zypper update && zypper upgrade -y
-
-	# installation de youtube-dl
-	wget https://yt-dl.org/latest/youtube-dl -O /usr/local/bin/youtube-dl
-	chmod a+x /usr/local/bin/youtube-dl
-	hash -r
-	#installation mp3 gain
-
-	 add-zypper-repository ppa:flexiondotorg/audio -y
-	 zypper-get update
-	 zypper-get install mp3gain -y
-
-	#installation des logiciels usuels des dépôts.
-	zypper install -y $SOFTWARES
-
-}
 
 desktop_configure () {
 	[ ! -d /usr/share/icons/twistos ] && mkdir /usr/share/icons/twistos
